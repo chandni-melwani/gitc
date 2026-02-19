@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'NUM1', defaultValue: '10', description: 'First Number')
+        string(name: 'NUM2', defaultValue: '20', description: 'Second Number')
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/chandni-melwani/agile-p1'
+            }
+        }
+
+        stage('Addition Build') {
+            steps {
+                bat "python add.py ${params.NUM1} ${params.NUM2}"
+            }
+        }
+
+    }
+}
